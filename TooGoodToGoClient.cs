@@ -2,20 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TGTG.Api.Core.Common;
-using TGTG.Api.Core.Models;
-using TGTG.Api.Core.Requests;
-using TGTG.Api.Core.Responses;
+using TGTG.Api.Core.Internal.Common;
+using TGTG.Api.Core.Internal.Requests;
+using TGTG.Api.Core.Internal.Responses;
 using TGTG.Api.Core.Utils;
 
 namespace TGTG.Api.Core
 {
-    public class Client : IDisposable
+    public class TooGoodToGoClient : IDisposable
     {
         private readonly InternalHttpClient _httpClient;
         private readonly TokenProvider _tokenProvider;
 
-        public Client(string email, string password)
+        public TimeSpan Timeout
+        {
+            get => _httpClient.Timeout;
+            set => _httpClient.Timeout = value;
+        }
+
+        public TooGoodToGoClient(string email, string password)
         {
             _httpClient = new InternalHttpClient();
             _tokenProvider = new TokenProvider(_httpClient, email, password);
@@ -35,7 +40,7 @@ namespace TGTG.Api.Core
             var storeRequest = new StoreRequest
             {
                 UserId = token.UserId,
-                BaseCoordinates = new BaseCoordinates(geoLocation.Latitude, geoLocation.Longitude),
+                LocationCoordinates = new LocationCoordinates(geoLocation.Latitude, geoLocation.Longitude),
                 Radius = radius
             };
 
@@ -72,7 +77,7 @@ namespace TGTG.Api.Core
                     AddressLine = storePickupLocation.Address.AddressLine,
                     City = storePickupLocation.Address.City,
                     Postcode = storePickupLocation.Address.Postcode,
-                    GeoLocation = new Coordinates(storePickupLocation.BaseCoordinates.Latitude, storePickupLocation.BaseCoordinates.Longitude)
+                    GeoLocation = new Coordinates(storePickupLocation.LocationCoordinates.Latitude, storePickupLocation.LocationCoordinates.Longitude)
                 }
             };
         }

@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace TGTG.Api.Core
+namespace TGTG.Api.Core.Utils
 {
     internal class InternalHttpClient : IDisposable
     {

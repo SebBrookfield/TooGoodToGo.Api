@@ -1,49 +1,49 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
-namespace TGTG.Api.Core.Responses
+namespace TGTG.Api.Core.Internal.Responses
 {
-    public class LoginResponse : TokenResponse
+    internal class LoginResponse : TokenResponse
     {
         [JsonProperty("startup_data")]
-        public StartupData Data { get; set; }
+        internal StartupData Data { get; set; }
     }
 
-    public class StartupData
+    internal class StartupData
     {
         [JsonProperty("user")]
-        public User User { get; set; }
+        internal User User { get; set; }
     }
 
-    public class User
+    internal class User
     {
         [JsonProperty("user_id")]
         public string UserId { get; set; }
-        
+
         [JsonProperty("name")]
         public string Name { get; set; }
-        
+
         [JsonProperty("country_id")]
         public string CountryId { get; set; }
-        
+
         [JsonProperty("email")]
         public string Email { get; set; }
-        
+
         [JsonProperty("phone_country_code")]
         public string PhoneCountryCode { get; set; }
-        
+
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
-        
+
         [JsonProperty("role")]
         public string Role { get; set; }
-        
+
         [JsonProperty("is_partner")]
-        public bool IsPartner { get; set; }
-        
+        internal bool IsPartner { get; set; }
+
         [JsonProperty("newsletter_opt_in")]
-        public bool NewsletterOptIn { get; set; }
-        
+        internal bool NewsletterOptIn { get; set; }
+
         [JsonProperty("push_notifications_opt_in")]
-        public bool PushNotificationsOptIn { get; set; }
+        internal bool PushNotificationsOptIn { get; set; }
     }
 }

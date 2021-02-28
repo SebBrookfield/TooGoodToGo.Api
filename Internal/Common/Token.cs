@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace TGTG.Api.Core
+namespace TGTG.Api.Core.Internal.Common
 {
     internal class Token
     {
         private readonly DateTime _issueDate;
         private readonly TimeSpan _tokenDuration = TimeSpan.FromHours(1);
 
-        internal string AccessToken { get; }
-        internal string RefreshToken { get; }
-        internal string UserId { get; }
+        public string AccessToken { get; }
+        public string RefreshToken { get; }
+        public string UserId { get; }
         internal bool IsExpired => DateTime.Now >= _issueDate.Add(_tokenDuration);
 
         internal Token(string accessToken, string refreshToken, string userId)

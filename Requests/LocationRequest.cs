@@ -1,17 +1,17 @@
 ﻿using Newtonsoft.Json;
-using TGTG.Api.Core.Common;
+using TGTG.Api.Core.Internal.Common;
 
-namespace TGTG.Api.Core.Requests
+namespace TGTG.Api.Core.Internal.Requests
 {
     internal class LocationRequest
     {
         [JsonProperty("query")]
-        internal string Query { get; set; }
+        public string Query { get; set; }
 
         [JsonProperty("location")]
-        internal BaseCoordinates Coordinates { get; set; }
+        internal LocationCoordinates Coordinates { get; set; }
 
-        public LocationRequest(string query)
+        internal LocationRequest(string query)
         {
             Query = query;
         }

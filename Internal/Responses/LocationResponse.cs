@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using TGTG.Api.Core.Common;
+using TGTG.Api.Core.Internal.Common;
 
-namespace TGTG.Api.Core.Responses
+namespace TGTG.Api.Core.Internal.Responses
 {
     internal class LocationResponse
     {
@@ -13,9 +13,9 @@ namespace TGTG.Api.Core.Responses
     internal class LocationResult
     {
         [JsonProperty("display_name")]
-        internal string Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("center")]
-        internal BaseCoordinates Coordinates { get; set; }
+        internal LocationCoordinates Coordinates { get; set; }
     }
 }

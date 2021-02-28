@@ -1,22 +1,22 @@
 ﻿using Newtonsoft.Json;
 
-namespace TGTG.Api.Core.Common
+namespace TGTG.Api.Core.Internal.Common
 {
-    internal class BaseCoordinates
+    internal class LocationCoordinates
     {
         [JsonProperty("latitude")]
-        public double Latitude { get; set; }
+        internal double Latitude { get; set; }
 
         [JsonProperty("longitude")]
-        public double Longitude { get; set; }
+        internal double Longitude { get; set; }
 
-        public BaseCoordinates(double latitude, double longitude)
+        internal LocationCoordinates(double latitude, double longitude)
         {
             Latitude = latitude;
             Longitude = longitude;
         }
 
-        public BaseCoordinates()
+        internal LocationCoordinates()
         {
         }
     }

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace TGTG.Api.Core.Requests
+namespace TGTG.Api.Core.Internal.Requests
 {
-    public class LoginRequest
+    internal class LoginRequest
     {
         [JsonProperty("device_type")]
         public string DeviceType => "ANDROID";
@@ -11,7 +11,7 @@ namespace TGTG.Api.Core.Requests
         [JsonProperty("password")]
         public string Password { get; set; }
 
-        public LoginRequest(string email, string password)
+        internal LoginRequest(string email, string password)
         {
             Email = email;
             Password = password;

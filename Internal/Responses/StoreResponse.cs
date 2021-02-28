@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using TGTG.Api.Core.Common;
+using TGTG.Api.Core.Internal.Common;
 
-namespace TGTG.Api.Core.Responses
+namespace TGTG.Api.Core.Internal.Responses
 {
     internal class StoreResponse
     {
         [JsonProperty("items")]
-        public List<StoreContainer> Containers { get; set; }
+        internal List<StoreContainer> Containers { get; set; }
     }
 
     internal class StoreContainer
@@ -19,34 +19,34 @@ namespace TGTG.Api.Core.Responses
         internal StoreItem Store { get; set; }
 
         [JsonProperty("pickup_location")]
-        public StoreItemAddress PickupLocation { get; set; }
+        internal StoreItemAddress PickupLocation { get; set; }
 
         [JsonProperty("favorite")]
-        public bool Favorited { get; set; }
+        internal bool Favorited { get; set; }
 
         [JsonProperty("distance")]
-        public double Distance { get; set; }
+        internal double Distance { get; set; }
     }
 
     internal class Item
     {
         [JsonProperty("item_id")]
-        internal string Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("description")]
-        internal string Description { get; set; }
+        public string Description { get; set; }
     }
 
     internal class StoreItem
     {
         [JsonProperty("store_id")]
-        internal string Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("store_name")]
-        internal string Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("website")]
-        internal string Website { get; set; }
+        public string Website { get; set; }
     }
 
     internal class StoreItemAddress
@@ -55,7 +55,7 @@ namespace TGTG.Api.Core.Responses
         internal ItemAddress Address { get; set; }
         
         [JsonProperty("location")]
-        internal BaseCoordinates BaseCoordinates { get; set; }
+        internal LocationCoordinates LocationCoordinates { get; set; }
     }
 
     internal class ItemAddress
@@ -63,16 +63,16 @@ namespace TGTG.Api.Core.Responses
         [JsonProperty("country")]
         internal Country Country { get; set; }
         [JsonProperty("address_line")]
-        internal string AddressLine { get; set; }
+        public string AddressLine { get; set; }
         [JsonProperty("city")]
-        internal string City { get; set; }
+        public string City { get; set; }
         [JsonProperty("postal_code")]
-        internal string Postcode { get; set; }
+        public string Postcode { get; set; }
     }
 
     internal class Country
     {
         [JsonProperty("country")]
-        internal string Name { get; set; }
+        public string Name { get; set; }
     }
 }

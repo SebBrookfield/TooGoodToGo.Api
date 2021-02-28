@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using TGTG.Api.Core.Requests;
-using TGTG.Api.Core.Responses;
+using TGTG.Api.Core.Internal.Common;
+using TGTG.Api.Core.Internal.Requests;
+using TGTG.Api.Core.Internal.Responses;
 
 namespace TGTG.Api.Core.Utils
 {
@@ -33,17 +34,14 @@ namespace TGTG.Api.Core.Utils
         private async Task<Token> FetchToken()
         {
             var loginRequest = new LoginRequest(_email, _password);
-            var loginUrl = Urls.Login();
-            var response = await _httpClient.PostAsync<LoginResponse, LoginRequest>(loginUrl, loginRequest, null);
+            var response = await _httpClient.PostAsync<LoginResponse, LoginRequest>(Urls.Login(), loginRequest, null);
 
             return new Token(response.AccessToken, response.RefreshToken, response.Data.User.UserId);
         }
 
         private async Task<Token> RefreshToken()
         {
-            var refreshRequest = new RefreshTokenRequest(_token.RefreshToken);
-            var refreshUrl = Urls.Refresh();
-            var response = await _httpClient.PostAsync<TokenResponse, RefreshTokenRequest>(refreshUrl, refreshRequest, _token.AccessToken);
+            var response = await _httpClient.PostAsync<TokenResponse, RefreshTokenRequest>(Urls.Refresh(), _token.RefreshToken, _token.AccessToken);
 
             return new Token(response.AccessToken, response.RefreshToken, _token.UserId);
         }

@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json;
-using TGTG.Api.Core.Common;
+using TGTG.Api.Core.Internal.Common;
 
-namespace TGTG.Api.Core.Requests
+namespace TGTG.Api.Core.Internal.Requests
 {
     internal class StoreRequest
     {
         [JsonProperty("user_id")]
         public string UserId { get; set; }
         [JsonProperty("origin")]
-        public BaseCoordinates BaseCoordinates { get; set; }
+        internal LocationCoordinates LocationCoordinates { get; set; }
         [JsonProperty("radius")]
-        public double Radius { get; set; }
+        internal double Radius { get; set; }
     }
 }

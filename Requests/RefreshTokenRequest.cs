@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace TGTG.Api.Core.Requests
+namespace TGTG.Api.Core.Internal.Requests
 {
-    public class RefreshTokenRequest
+    internal class RefreshTokenRequest
     {
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; }
 
-        public RefreshTokenRequest(string refreshToken)
-        {
-            RefreshToken = refreshToken;
-        }
+        public static implicit operator RefreshTokenRequest(string str) => new RefreshTokenRequest { RefreshToken = str };
     }
 }

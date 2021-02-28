@@ -1,4 +1,4 @@
-﻿namespace TGTG.Api.Core.Models
+﻿namespace TGTG.Api.Core
 {
     public class Location
     {
