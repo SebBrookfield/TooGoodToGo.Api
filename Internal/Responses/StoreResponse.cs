@@ -26,6 +26,12 @@ namespace TGTG.Api.Core.Internal.Responses
 
         [JsonProperty("distance")]
         internal double Distance { get; set; }
+
+        [JsonProperty("items_available")]
+        internal int ItemsAvailable { get; set; }
+
+        [JsonProperty("in_sales_window")]
+        internal bool InSalesWindow { get; set; }
     }
 
     internal class Item

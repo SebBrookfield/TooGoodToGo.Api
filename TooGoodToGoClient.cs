@@ -26,6 +26,16 @@ namespace TGTG.Api.Core
             _tokenProvider = new TokenProvider(_httpClient, email, password);
         }
 
+        public async Task SetFavourite(string itemId)
+        {
+            await SetFavourite(itemId, true);
+        }
+
+        public async Task UnsetFavourite(string itemId)
+        {
+            await SetFavourite(itemId, false);
+        }
+
         public async Task<List<Location>> FindLocationsAsync(string location)
         {
             var response = await PostAsync<LocationResponse, LocationRequest>(Urls.Locations, new LocationRequest(location));
@@ -51,6 +61,11 @@ namespace TGTG.Api.Core
                 .ToList();
         }
 
+        private async Task SetFavourite(string itemId, bool isFavourite)
+        {
+            await PostAsync(Urls.SetFavourite(itemId), isFavourite);
+        }
+
         private static Location ConvertToLocation(LocationResult location)
         {
             return new Location
@@ -73,6 +88,8 @@ namespace TGTG.Api.Core
                 Website = container.Store.Website,
                 Distance = container.Distance,
                 Favourited = container.Favorited,
+                NumberOfItemsAvailable = container.ItemsAvailable,
+                InSalesWindow = container.InSalesWindow,
                 Address = new Address
                 {
                     AddressLine = storePickupLocation.Address.AddressLine,
@@ -87,6 +104,12 @@ namespace TGTG.Api.Core
         {
             var token = await _tokenProvider.GetToken();
             return await _httpClient.PostAsync<TResponse, TRequest>(url, request, token.AccessToken);
+        }
+
+        private async Task PostAsync<TRequest>(string url, TRequest request)
+        {
+            var token = await _tokenProvider.GetToken();
+            await _httpClient.PostAsync(url, request, token.AccessToken);
         }
 
         public void Dispose()

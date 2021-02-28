@@ -11,6 +11,10 @@
         public double Distance { get; set; }
         public bool Favourited { get; set; }
 
-        public override string ToString() => Name;
+        public int NumberOfItemsAvailable { get; set; }
+        // This appears to indicate whether to show "Check back later".
+        public bool InSalesWindow { get; set; }
+
+        public override string ToString() => $"{Name}";
     }
 }

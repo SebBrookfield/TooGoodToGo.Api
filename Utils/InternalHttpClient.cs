@@ -23,14 +23,25 @@ namespace TGTG.Api.Core.Utils
 
         internal async Task<TResponse> PostAsync<TResponse, TRequest>(string url, TRequest request, string token)
         {
+            var response = await PostInternalAsync(url, request, token);
+            var responseJson = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<TResponse>(responseJson);
+        }
+
+        internal async Task PostAsync<TRequest>(string url, TRequest request, string token)
+        {
+            await PostInternalAsync(url, request, token);
+        }
+
+        private async Task<HttpResponseMessage> PostInternalAsync<TRequest>(string url, TRequest request, string token)
+        {
             var requestJson = JsonConvert.SerializeObject(request);
             var requestMessage = CreateMessage(url, requestJson, token);
             var response = await _httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseContentRead);
 
             response.EnsureSuccessStatusCode();
 
-            var responseJson = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TResponse>(responseJson);
+            return response;
         }
 
         private static HttpRequestMessage CreateMessage(string url, string json, string token)
