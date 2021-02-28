@@ -34,14 +34,14 @@ namespace TGTG.Api.Core.Utils
         private async Task<Token> FetchToken()
         {
             var loginRequest = new LoginRequest(_email, _password);
-            var response = await _httpClient.PostAsync<LoginResponse, LoginRequest>(Urls.Login(), loginRequest, null);
+            var response = await _httpClient.PostAsync<LoginResponse, LoginRequest>(Urls.Login, loginRequest, null);
 
             return new Token(response.AccessToken, response.RefreshToken, response.Data.User.UserId);
         }
 
         private async Task<Token> RefreshToken()
         {
-            var response = await _httpClient.PostAsync<TokenResponse, RefreshTokenRequest>(Urls.Refresh(), _token.RefreshToken, _token.AccessToken);
+            var response = await _httpClient.PostAsync<TokenResponse, RefreshTokenRequest>(Urls.Refresh, _token.RefreshToken, _token.AccessToken);
 
             return new Token(response.AccessToken, response.RefreshToken, _token.UserId);
         }

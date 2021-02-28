@@ -28,7 +28,7 @@ namespace TGTG.Api.Core
 
         public async Task<List<Location>> FindLocationsAsync(string location)
         {
-            var response = await PostAsync<LocationResponse, LocationRequest>(Urls.Locations(), new LocationRequest(location));
+            var response = await PostAsync<LocationResponse, LocationRequest>(Urls.Locations, new LocationRequest(location));
             return response.Locations
                 .Select(ConvertToLocation)
                 .ToList();
@@ -44,7 +44,7 @@ namespace TGTG.Api.Core
                 Radius = radius
             };
 
-            var response = await PostAsync<StoreResponse, StoreRequest>(Urls.Stores(), storeRequest);
+            var response = await PostAsync<StoreResponse, StoreRequest>(Urls.Stores, storeRequest);
 
             return response.Containers
                 .Select(ConvertToStore)
@@ -67,6 +67,7 @@ namespace TGTG.Api.Core
             return new Store
             {
                 Id = container.Store.Id,
+                ItemId = container.Item.Id,
                 Name = container.Store.Name,
                 Description = container.Item.Description,
                 Website = container.Store.Website,
