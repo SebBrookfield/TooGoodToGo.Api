@@ -16,5 +16,9 @@
         public bool InSalesWindow { get; set; }
 
         public override string ToString() => $"{Name}";
+
+        protected internal Store()
+        {
+        }
     }
 }

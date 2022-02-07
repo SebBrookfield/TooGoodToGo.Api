@@ -6,5 +6,9 @@
         public Coordinates Coordinates { get; set; }
 
         public override string ToString() => Name;
+
+        protected internal Location()
+        {
+        }
     }
 }

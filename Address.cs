@@ -6,5 +6,9 @@
         public string City { get; set; }
         public string Postcode { get; set; }
         public Coordinates GeoLocation { get; set; }
+
+        protected internal Address()
+        {
+        }
     }
 }

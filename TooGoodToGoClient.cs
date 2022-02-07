@@ -61,6 +61,11 @@ namespace TGTG.Api.Core
                 .ToList();
         }
 
+        public Task<List<Order>> GetActiveOrders(int userId, int page, int itemsPerPage = 20)
+        {
+
+        }
+
         private async Task SetFavourite(string itemId, bool isFavourite)
         {
             await PostAsync(Urls.SetFavourite(itemId), isFavourite);
